@@ -30,7 +30,6 @@ export default {
 
   methods: {
     onResults(results) {
-      console.log(results);
       const canvasElement = this.$refs.canvasElement;
       const canvasCtx = this.canvasCtx;
       canvasCtx.save();
@@ -43,6 +42,7 @@ export default {
         canvasElement.height
       );
       if (results.multiHandLandmarks) {
+        console.log(results.multiHandLandmarks);
         for (const landmarks of results.multiHandLandmarks) {
           drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
             color: "#00FF00",
