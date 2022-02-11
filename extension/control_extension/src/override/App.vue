@@ -15,6 +15,9 @@
 import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 import { Camera } from "@mediapipe/camera_utils";
+
+// import modelWeights from "@mediapipe/hands/hand_landmark_lite.tflite";
+
 export default {
   name: "App",
   data() {
@@ -55,13 +58,19 @@ export default {
     },
   },
   mounted() {
+    // console.log(modelWeights);
     this.canvasCtx = this.$refs.canvasElement.getContext("2d");
     console.log(this.$refs.canvasElement.getContext("2d"));
-    const hands = new Hands();
+    const hands = new Hands({
+      locateFile: (file) => {
+        console.log("File", file);
+        return `./hands_lib/${file}`;
+      },
+    });
 
     hands.setOptions({
       maxNumHands: 2,
-      modelComplexity: 1,
+      modelComplexity: 0,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
     });
