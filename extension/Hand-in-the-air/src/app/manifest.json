@@ -1,0 +1,37 @@
+{
+  "name": "Hand in the Air",
+  "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwe4bIvIb+NPPR+GE71+3\nG+Bh8+E41lzt0Ht2qEcUaMfkrMBTXPfh1cVpnAhnakq3UI23w29lPngMVGWK8Bki\nJIORoT7xfyiPTnN7QK5p5MrKZnZ0lVRj3raqT3JFaor/ls4Ng0rAvQpMtPUK9Ede\nLtE/ElVKOxcNvpDryPKsd7naowgy7WBXpcWt7qu99KtzNHvrFJs66absPDrOVwl+\nHVAQEqufLSpheRWbaubgi0zEMiFKPCUJ4FzAgf2z5v4mtXlfvItQOXDlGsqX/7MX\nNmOOceRqzXaytOEOW9VqiROkdeBFGNZfAhR6DeyafDBvnTxwTAiEXCGt89ZYeaMr\nYQIDAQAB\n-----END PUBLIC KEY-----\n",
+  "version": "0.0.20",
+  "manifest_version": 2,
+  "description": " hand gesture recognition",
+  "icons": {
+    "16": "images/16x16.png",
+    "128": "images/128x128.png"
+  },
+  "background": {
+    "scripts": ["background.bundle.js"]
+  },
+  "permissions": ["tabs", "activeTab", "storage", "*://*/*"],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/16x16.png",
+      "48": "images/48x48.png"
+    },
+    "default_title": "hand in the air"
+  },
+  "web_accessible_resources": [
+    "background.bundle.js.map",
+    "content_script.bundle.js.map",
+    "option.bundle.js.map",
+    "popup.bundle.js.map"
+  ],
+  "options_page": "option.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.bundle.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

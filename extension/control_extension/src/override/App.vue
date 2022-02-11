@@ -58,36 +58,36 @@ export default {
       if (results.multiHandLandmarks) console.log(results.multiHandLandmarks);
     },
   },
-  mounted() {
-    // console.log(modelWeights);
-    this.canvasCtx = this.$refs.canvasElement.getContext("2d");
-    console.log(this.$refs.canvasElement.getContext("2d"));
-    const hands = new Hands({
-      locateFile: (file) => {
-        return `./hands_lib/${file}`;
-      },
-    });
+  //   mounted() {
+  //     // console.log(modelWeights);
+  //     this.canvasCtx = this.$refs.canvasElement.getContext("2d");
+  //     console.log(this.$refs.canvasElement.getContext("2d"));
+  //     const hands = new Hands({
+  //       locateFile: (file) => {
+  //         return `./hands_lib/${file}`;
+  //       },
+  //     });
 
-    hands.setOptions({
-      maxNumHands: 1,
-      modelComplexity: 0,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5,
-    });
+  //     hands.setOptions({
+  //       maxNumHands: 1,
+  //       modelComplexity: 0,
+  //       minDetectionConfidence: 0.5,
+  //       minTrackingConfidence: 0.5,
+  //     });
 
-    hands.onResults(this.onResultsConsole);
+  //     hands.onResults(this.onResultsConsole);
 
-    this.hands = hands;
-    const videoElement = document.createElement("video");
-    const camera = new Camera(videoElement, {
-      onFrame: async () => {
-        await hands.send({ image: videoElement });
-      },
-      width: 1280,
-      height: 720,
-    });
-    camera.start();
-    // console.log("start");
-  },
+  //     this.hands = hands;
+  //     const videoElement = document.createElement("video");
+  //     const camera = new Camera(videoElement, {
+  //       onFrame: async () => {
+  //         await hands.send({ image: videoElement });
+  //       },
+  //       width: 1280,
+  //       height: 720,
+  //     });
+  //     camera.start();
+  //     // console.log("start");
+  //   },
 };
 </script>
