@@ -1,5 +1,5 @@
 console.log("Hello from the content-script");
-import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
+import { Hands } from "@mediapipe/hands";
 import { Camera } from "@mediapipe/camera_utils";
 
 function onResultsConsole(results) {
@@ -19,7 +19,7 @@ hands.setOptions({
   minTrackingConfidence: 0.5,
 });
 
-hands.onResults(this.onResultsConsole);
+hands.onResults(onResultsConsole);
 
 const videoElement = document.createElement("video");
 const camera = new Camera(videoElement, {

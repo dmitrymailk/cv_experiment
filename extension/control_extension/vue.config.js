@@ -1,10 +1,10 @@
 module.exports = {
   pages: {
-    popup: {
-      template: "public/browser-extension.html",
-      entry: "./src/popup/main.js",
-      title: "Popup",
-    },
+    // popup: {
+    //   template: "public/browser-extension.html",
+    //   entry: "./src/popup/main.js",
+    //   title: "Popup",
+    // },
     options: {
       template: "public/browser-extension.html",
       entry: "./src/options/main.js",
