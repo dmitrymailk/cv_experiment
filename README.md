@@ -7,3 +7,8 @@
 ## Vue extension starter pack
 
 - [vue-web-extension](https://github.com/Kocal/vue-web-extension)
+
+## Tensorflow js
+
+- [tensor operations](https://www.tensorflow.org/js/guide/tensors_operations)
+- [einsum tensorflow explained](https://www.tensorflow.org/api_docs/python/tf/einsum)

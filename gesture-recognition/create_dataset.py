@@ -70,8 +70,8 @@ while cap.isOpened():
                     # print(v1)
                     # print("------------Vector 2-------------")
                     # print(v2)
-                    # print("------------Angle-------------")
-                    # print(angle)
+                    print("------------Angle-------------")
+                    print(angle.shape, angle)
 
                     angle = np.degrees(angle)  # Convert radian to degree
 
