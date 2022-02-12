@@ -21,7 +21,7 @@
         };
   function t(a) {
     a = [
-      "object" == typeof globalThis && globalThis,
+      //   "object" == typeof globalThis && globalThis,
       a,
       "object" == typeof window && window,
       "object" == typeof self && self,

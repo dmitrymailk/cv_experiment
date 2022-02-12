@@ -1,20 +1,22 @@
 import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
-import { Camera } from "@mediapipe/camera_utils";
+import { Camera } from "./libs/@mediapipe/camera_utils";
 
 chrome.browserAction.onClicked.addListener(() => {
   console.log("click");
   function onResultsConsole(results) {
     if (results.multiHandLandmarks) console.log(results.multiHandLandmarks);
   }
-
+  let loadedFiles = 0;
   const hands = new Hands({
     locateFile: (file) => {
       console.log(file);
       const filename = `./hands_lib/${file}`;
-      if (!window[filename]) {
-        window[filename] = filename;
-        return filename;
-      }
+      //   const filename = `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+      loadedFiles += 1;
+      if (loadedFiles > 4) window.interval_time = 1000 / 60;
+      //   if (!window[filename]) {
+      //     window[filename] = filename;
+      return filename;
     },
   });
 
