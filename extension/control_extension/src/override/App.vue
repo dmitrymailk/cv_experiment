@@ -1,13 +1,7 @@
 <template>
   <div>
     <h1>Hello world</h1>
-    <video class="input_video" ref="videoElement"></video>
-    <canvas
-      class="output_canvas"
-      width="1280px"
-      height="720px"
-      ref="canvasElement"
-    ></canvas>
+    <!-- <video class="input_video" ref="videoElement"></video> -->
   </div>
 </template>
 
@@ -58,36 +52,41 @@ export default {
       if (results.multiHandLandmarks) console.log(results.multiHandLandmarks);
     },
   },
-  //   mounted() {
-  //     // console.log(modelWeights);
-  //     this.canvasCtx = this.$refs.canvasElement.getContext("2d");
-  //     console.log(this.$refs.canvasElement.getContext("2d"));
-  //     const hands = new Hands({
-  //       locateFile: (file) => {
-  //         return `./hands_lib/${file}`;
-  //       },
-  //     });
+  mounted() {
+    // console.log(modelWeights);
+    // this.canvasCtx = this.$refs.canvasElement.getContext("2d");
+    // console.log(this.$refs.canvasElement.getContext("2d"));
+    const hands = new Hands({
+      locateFile: (file) => {
+        console.log(file);
+        return `./hands_lib/${file}`;
+      },
+    });
 
-  //     hands.setOptions({
-  //       maxNumHands: 1,
-  //       modelComplexity: 0,
-  //       minDetectionConfidence: 0.5,
-  //       minTrackingConfidence: 0.5,
-  //     });
+    hands.setOptions({
+      maxNumHands: 1,
+      modelComplexity: 0,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
 
-  //     hands.onResults(this.onResultsConsole);
+    hands.onResults(this.onResultsConsole);
 
-  //     this.hands = hands;
-  //     const videoElement = document.createElement("video");
-  //     const camera = new Camera(videoElement, {
-  //       onFrame: async () => {
-  //         await hands.send({ image: videoElement });
-  //       },
-  //       width: 1280,
-  //       height: 720,
-  //     });
-  //     camera.start();
-  //     // console.log("start");
-  //   },
+    window.hands = hands;
+
+    this.hands = hands;
+    const videoElement = document.createElement("video");
+    const camera = new Camera(videoElement, {
+      onFrame: async () => {
+        console.warn("videoElement", videoElement);
+        await hands.send({ image: videoElement });
+      },
+      width: 1280,
+      height: 720,
+    });
+    window.camera = camera;
+    // camera.start();
+    // console.log("start");
+  },
 };
 </script>
