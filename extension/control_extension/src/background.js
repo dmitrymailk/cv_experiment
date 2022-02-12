@@ -10,7 +10,11 @@ chrome.browserAction.onClicked.addListener(() => {
   const hands = new Hands({
     locateFile: (file) => {
       console.log(file);
-      return `./hands_lib/${file}`;
+      const filename = `./hands_lib/${file}`;
+      if (!window[filename]) {
+        window[filename] = filename;
+        return filename;
+      }
     },
   });
 
@@ -28,7 +32,7 @@ chrome.browserAction.onClicked.addListener(() => {
   const videoElement = document.createElement("video");
   const camera = new Camera(videoElement, {
     onFrame: async () => {
-      console.warn("videoElement", videoElement);
+      //   console.warn("videoElement", videoElement);
       await hands.send({ image: videoElement });
     },
     width: 1280,

@@ -8,7 +8,8 @@
 <script>
 import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
-import { Camera } from "@mediapipe/camera_utils";
+// import { Camera } from "@mediapipe/camera_utils";
+import { Camera } from "../libs/@mediapipe/camera_utils";
 
 export default {
   name: "App",
@@ -58,6 +59,7 @@ export default {
     // console.log(this.$refs.canvasElement.getContext("2d"));
     const hands = new Hands({
       locateFile: (file) => {
+        // debugger;
         console.log(file);
         return `./hands_lib/${file}`;
       },
@@ -78,13 +80,15 @@ export default {
     const videoElement = document.createElement("video");
     const camera = new Camera(videoElement, {
       onFrame: async () => {
-        console.warn("videoElement", videoElement);
+        // debugger;
+        // console.warn("videoElement", videoElement);
         await hands.send({ image: videoElement });
       },
       width: 1280,
       height: 720,
     });
     window.camera = camera;
+    // debugger;
     // camera.start();
     // console.log("start");
   },
