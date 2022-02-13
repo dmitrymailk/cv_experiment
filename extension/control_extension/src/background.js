@@ -3,7 +3,22 @@ import { Camera } from "./libs/@mediapipe/camera_utils";
 const PI = 3.14159265359;
 import * as tf from "@tensorflow/tfjs";
 
-chrome.browserAction.onClicked.addListener(() => {});
+chrome.browserAction.onClicked.addListener(() => {
+  console.log("send message from background");
+  //   chrome.runtime.sendMessage("{ quote: true }");
+
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { type: "scroll_up" });
+  });
+});
+
+function sendAction(actionType) {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { type: actionType });
+  });
+}
+
+const allEqual = (arr) => arr.every((v) => v === arr[0]);
 
 const startBackground = async () => {
   console.log("click");
@@ -12,6 +27,8 @@ const startBackground = async () => {
   const seq_length = 30;
   const secs_for_action = 30;
   const ACTIONS = ["scroll_up", "scroll_down", "zoom"];
+  const CONFIDEND_LEVEL = 3;
+  const THRESHHOLD = 0.7;
 
   let seq = [];
   let action_seq = [];
@@ -79,10 +96,26 @@ const startBackground = async () => {
           );
 
           let y_pred = model.predict(input_data).squeeze();
-
           let i_pred = tf.argMax(y_pred).arraySync();
+          console.log(y_pred.arraySync()[i_pred]);
+          y_pred = y_pred.arraySync();
+          if (y_pred[i_pred] > THRESHHOLD) {
+            const actionType = ACTIONS[i_pred];
+            console.log(actionType);
 
-          console.log(ACTIONS[i_pred]);
+            action_seq.push(actionType);
+
+            if (action_seq.length > CONFIDEND_LEVEL) {
+              let lenSeq = action_seq.length;
+              const actionSlice = action_seq.slice(-CONFIDEND_LEVEL);
+              console.log(actionSlice);
+              if (allEqual(actionSlice)) {
+                sendAction(actionType);
+              }
+            }
+
+            sendAction(actionType);
+          }
         }
       }
     }
