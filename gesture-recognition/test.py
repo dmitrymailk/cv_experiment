@@ -60,7 +60,7 @@ while cap.isOpened():
             angle = np.degrees(angle)  # Convert radian to degree
 
             d = np.concatenate([joint.flatten(), angle])
-
+            print(len(d))
             seq.append(d)
 
             mp_drawing.draw_landmarks(img, res, mp_hands.HAND_CONNECTIONS)
@@ -70,6 +70,8 @@ while cap.isOpened():
 
             input_data = np.expand_dims(
                 np.array(seq[-seq_length:], dtype=np.float32), axis=0)
+
+            print(input_data.shape)
 
             y_pred = model.predict(input_data).squeeze()
 

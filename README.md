@@ -12,3 +12,8 @@
 
 - [tensor operations](https://www.tensorflow.org/js/guide/tensors_operations)
 - [einsum tensorflow explained](https://www.tensorflow.org/api_docs/python/tf/einsum)
+- [export models to tensorlow js](https://www.tensorflow.org/js/tutorials/conversion/import_keras)
+
+```
+tensorflowjs_converter --input_format keras ./models/model.h5 ./models_js/
+```
