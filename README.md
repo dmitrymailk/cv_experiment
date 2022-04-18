@@ -1,3 +1,9 @@
+## Hackathon website https://devpost.com/software/browser-gestures-contol
+
+## Watch the video
+
+[![Watch the video](./github_images/preview.jpg.png)](https://youtu.be/e6nFpbgzzNI)
+
 - [create python env](https://docs.python.org/3/library/venv.html)
 
 ## Pose movements
